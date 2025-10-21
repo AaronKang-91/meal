@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     // 학교 검색 이벤트 리스너 추가
     setupSchoolSearch();
+    
+    // 날짜 이동 버튼 이벤트 리스너 추가
+    setupDateControls();
 });
 
 // 폼 제출 처리
@@ -252,5 +255,41 @@ function displaySuggestions(schools) {
             suggestions.style.display = 'none';
             updateSchoolDisplay();
         });
+    });
+}
+
+// 날짜 컨트롤 설정
+function setupDateControls() {
+    const prevDayBtn = document.getElementById('prevDay');
+    const nextDayBtn = document.getElementById('nextDay');
+    const dateInput = document.getElementById('date');
+    
+    // 이전 날 버튼
+    prevDayBtn.addEventListener('click', function() {
+        const currentDate = new Date(dateInput.value);
+        currentDate.setDate(currentDate.getDate() - 1);
+        const newDateString = currentDate.toISOString().split('T')[0];
+        dateInput.value = newDateString;
+        
+        // 자동으로 급식 조회
+        searchMeal(newDateString);
+    });
+    
+    // 다음 날 버튼
+    nextDayBtn.addEventListener('click', function() {
+        const currentDate = new Date(dateInput.value);
+        currentDate.setDate(currentDate.getDate() + 1);
+        const newDateString = currentDate.toISOString().split('T')[0];
+        dateInput.value = newDateString;
+        
+        // 자동으로 급식 조회
+        searchMeal(newDateString);
+    });
+    
+    // 날짜 입력 변경 시 자동 조회
+    dateInput.addEventListener('change', function() {
+        if (this.value) {
+            searchMeal(this.value);
+        }
     });
 }
