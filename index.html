@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 급식</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍽️ 오늘의 급식</h1>
+            <div class="school-info" id="schoolName" style="font-size: 1.1rem; margin-bottom: 10px; opacity: 0.9;"></div>
+            <div class="date-info" id="currentDate"></div>
+        </div>
+
+        <div class="search-section">
+            <form class="search-form" id="searchForm">
+                <div class="form-group">
+                    <label for="schoolName">학교명</label>
+                    <input type="text" id="schoolNameInput" placeholder="예: 서울고등학교" required>
+                    <div id="schoolSuggestions" class="suggestions"></div>
+                </div>
+                <div class="form-group">
+                    <label for="date">날짜</label>
+                    <input type="date" id="date" required>
+                </div>
+                <button type="submit" class="btn">급식 조회</button>
+            </form>
+        </div>
+
+        <div class="meal-section" id="mealSection">
+            <div class="loading" id="loading" style="display: none;">
+                급식 정보를 불러오는 중...
+            </div>
+            <div id="mealContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
